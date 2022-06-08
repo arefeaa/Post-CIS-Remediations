@@ -26,7 +26,6 @@
 - 
   hosts: all 
   gather_facts: yes
-  collections: community.general  
   vars:
     var_sudo_logfile: !!str /var/log/sudo.log
     var_password_pam_remember: !!str 5
