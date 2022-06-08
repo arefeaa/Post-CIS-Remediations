@@ -14,92 +14,93 @@
 ## This Section is to configure pam_tally2.mo for system-auth
 ##
 ##############################################################################################################################################
-tasks:
+-
+    tasks:
 
-    - name: Insert a new rule after and existing rule
-      pamd:
-        name: system-auth
-        type: auth 
-        control: required 
-        module_path: pam_env.so
-        new_type: auth
-        new_control: required
-        new_module_path: pam_tally2.so
-        state: after
-      when: 
-        - '{{ ansible_distribution_file_variety }} == "RedHat"'
-        - '{{ ansible_distribution_major_version }} == "7"'
+        - name: Insert a new rule after and existing rule
+          pamd:
+            name: system-auth
+            type: auth 
+            control: required 
+            module_path: pam_env.so
+            new_type: auth
+            new_control: required
+            new_module_path: pam_tally2.so
+            state: after
+          when: 
+            - '{{ ansible_distribution_file_variety }} == "RedHat"'
+            - '{{ ansible_distribution_major_version }} == "7"'
 
-    - name: Update pamd faillock rule arguments
-      pamd:
-        name: system-auth
-        type: auth 
-        control: required 
-        module_path: pam_tally2.so
-        module_arguments: 'deny=5 onerr=fail unlock_time=900'
-        state: updated
-      when: 
-        - '{{ ansible_distribution_file_variety }} == "RedHat"'
-        - '{{ ansible_distribution_major_version }} == "7"'
-    
-    - name: Inser a new rule after and existing rule
-      pamd:
-        name: system-auth
-        type: account 
-        control: required 
-        module_path: pam_unix.so
-        new_type: account
-        new_control: required
-        new_module_path: pam_tally2.so
-        state: before
-      when: 
-        - '{{ ansible_distribution_file_variety }} == "RedHat"'
-        - '{{ ansible_distribution_major_version }} == "7"'
+        - name: Update pamd faillock rule arguments
+          pamd:
+            name: system-auth
+            type: auth 
+            control: required 
+            module_path: pam_tally2.so
+            module_arguments: 'deny=5 onerr=fail unlock_time=900'
+            state: updated
+          when: 
+            - '{{ ansible_distribution_file_variety }} == "RedHat"'
+            - '{{ ansible_distribution_major_version }} == "7"'
+
+        - name: Inser a new rule after and existing rule
+          pamd:
+            name: system-auth
+            type: account 
+            control: required 
+            module_path: pam_unix.so
+            new_type: account
+            new_control: required
+            new_module_path: pam_tally2.so
+            state: before
+          when: 
+            - '{{ ansible_distribution_file_variety }} == "RedHat"'
+            - '{{ ansible_distribution_major_version }} == "7"'
 
 
-        
-##############################################################################################################################################
-## 
-## This Section is to configure faillock.mo for password-auth
-##
-##############################################################################################################################################
 
-    - name: Inser a new rule after and existing rule
-      pamd:
-        name: password-auth
-        type: auth 
-        control: required 
-        module_path: pam_env.so
-        new_type: auth
-        new_control: required
-        new_module_path: pam_tally2.so
-        state: after
-      when: 
-        - '{{ ansible_distribution_file_variety }} == "RedHat"'
-        - '{{ ansible_distribution_major_version }} == "7"'
+    ##############################################################################################################################################
+    ## 
+    ## This Section is to configure faillock.mo for password-auth
+    ##
+    ##############################################################################################################################################
 
-    - name: Update pamd faillock rule arguments
-      pamd:
-        name: password-auth
-        type: auth 
-        control: required 
-        module_path: pam_tally2.so
-        module_arguments: 'deny=5 onerr=fail unlock_time=900'
-        state: updated
-      when: 
-        - '{{ ansible_distribution_file_variety }} == "RedHat"'
-        - '{{ ansible_distribution_major_version }} == "7"'
-    
-    - name: Inser a new rule after and existing rule
-      pamd:
-        name: password-auth
-        type: account 
-        control: required 
-        module_path: pam_unix.so
-        new_type: account
-        new_control: required
-        new_module_path: pam_tally2.so
-        state: before
-      when: 
-        - '{{ ansible_distribution_file_variety }} == "RedHat"'
-        - '{{ ansible_distribution_major_version }} == "7"'
+        - name: Inser a new rule after and existing rule
+          pamd:
+            name: password-auth
+            type: auth 
+            control: required 
+            module_path: pam_env.so
+            new_type: auth
+            new_control: required
+            new_module_path: pam_tally2.so
+            state: after
+          when: 
+            - '{{ ansible_distribution_file_variety }} == "RedHat"'
+            - '{{ ansible_distribution_major_version }} == "7"'
+
+        - name: Update pamd faillock rule arguments
+          pamd:
+            name: password-auth
+            type: auth 
+            control: required 
+            module_path: pam_tally2.so
+            module_arguments: 'deny=5 onerr=fail unlock_time=900'
+            state: updated
+          when: 
+            - '{{ ansible_distribution_file_variety }} == "RedHat"'
+            - '{{ ansible_distribution_major_version }} == "7"'
+
+        - name: Inser a new rule after and existing rule
+          pamd:
+            name: password-auth
+            type: account 
+            control: required 
+            module_path: pam_unix.so
+            new_type: account
+            new_control: required
+            new_module_path: pam_tally2.so
+            state: before
+          when: 
+            - '{{ ansible_distribution_file_variety }} == "RedHat"'
+            - '{{ ansible_distribution_major_version }} == "7"'
