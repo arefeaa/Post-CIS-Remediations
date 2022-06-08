@@ -14,92 +14,93 @@
 ## This Section is to configure faillock.mo for system-auth
 ##
 ##############################################################################################################################################
-tasks:
+-
+    tasks:
 
-    - name: Inser a new rule after and existing rule
-      pamd:
-        name: system-auth
-        type: auth 
-        control: required 
-        module_path: pam_env.so
-        new_type: auth
-        new_control: required
-        new_module_path: pam_faillock.so
-        state: after
-      when: 
-        - '{{ ansible_distribution_file_variety }} == "RedHat"'
-        - '{{ ansible_distribution_major_version }} == "8"'
+        - name: Inser a new rule after and existing rule
+          pamd:
+            name: system-auth
+            type: auth 
+            control: required 
+            module_path: pam_env.so
+            new_type: auth
+            new_control: required
+            new_module_path: pam_faillock.so
+            state: after
+          when: 
+            - '{{ ansible_distribution_file_variety }} == "RedHat"'
+            - '{{ ansible_distribution_major_version }} == "8"'
 
-    - name: Update pamd faillock rule arguments
-      pamd:
-        name: system-auth
-        type: auth 
-        control: required 
-        module_path: pam_faillock.so
-        module_arguments: 'preauth silent audit deny=5 unlock_time=900'
-        state: updated
-      when: 
-        - '{{ ansible_distribution_file_variety }} == "RedHat"'
-        - '{{ ansible_distribution_major_version }} == "8"'
-    
-    - name: Inser a new rule after and existing rule
-      pamd:
-        name: system-auth
-        type: account 
-        control: required 
-        module_path: pam_unix.so
-        new_type: account
-        new_control: required
-        new_module_path: pam_faillock.so
-        state: before
-      when: 
-        - '{{ ansible_distribution_file_variety }} == "RedHat"'
-        - '{{ ansible_distribution_major_version }} == "8"'
+        - name: Update pamd faillock rule arguments
+          pamd:
+            name: system-auth
+            type: auth 
+            control: required 
+            module_path: pam_faillock.so
+            module_arguments: 'preauth silent audit deny=5 unlock_time=900'
+            state: updated
+          when: 
+            - '{{ ansible_distribution_file_variety }} == "RedHat"'
+            - '{{ ansible_distribution_major_version }} == "8"'
+
+        - name: Inser a new rule after and existing rule
+          pamd:
+            name: system-auth
+            type: account 
+            control: required 
+            module_path: pam_unix.so
+            new_type: account
+            new_control: required
+            new_module_path: pam_faillock.so
+            state: before
+          when: 
+            - '{{ ansible_distribution_file_variety }} == "RedHat"'
+            - '{{ ansible_distribution_major_version }} == "8"'
 
 
-        
-##############################################################################################################################################
-## 
-## This Section is to configure faillock.so for password-auth
-##
-##############################################################################################################################################
 
-    - name: Inser a new rule after and existing rule
-      pamd:
-        name: password-auth
-        type: auth 
-        control: required 
-        module_path: pam_env.so
-        new_type: auth
-        new_control: required
-        new_module_path: pam_faillock.so
-        state: after
-      when: 
-        - '{{ ansible_distribution_file_variety }} == "RedHat"'
-        - '{{ ansible_distribution_major_version }} == "8"'
+    ##############################################################################################################################################
+    ## 
+    ## This Section is to configure faillock.so for password-auth
+    ##
+    ##############################################################################################################################################
 
-    - name: Update pamd faillock rule arguments
-      pamd:
-        name: password-auth
-        type: auth 
-        control: required 
-        module_path: pam_faillock.so
-        module_arguments: 'preauth silent audit deny=5 unlock_time=900'
-        state: updated
-      when: 
-        - '{{ ansible_distribution_file_variety }} == "RedHat"'
-        - '{{ ansible_distribution_major_version }} == "8"'
-    
-    - name: Inser a new rule after and existing rule
-      pamd:
-        name: password-auth
-        type: account 
-        control: required 
-        module_path: pam_unix.so
-        new_type: account
-        new_control: required
-        new_module_path: pam_faillock.so
-        state: before
-      when: 
-        - '{{ ansible_distribution_file_variety }} == "RedHat"'
-        - '{{ ansible_distribution_major_version }} == "8"'
+        - name: Inser a new rule after and existing rule
+          pamd:
+            name: password-auth
+            type: auth 
+            control: required 
+            module_path: pam_env.so
+            new_type: auth
+            new_control: required
+            new_module_path: pam_faillock.so
+            state: after
+          when: 
+            - '{{ ansible_distribution_file_variety }} == "RedHat"'
+            - '{{ ansible_distribution_major_version }} == "8"'
+
+        - name: Update pamd faillock rule arguments
+          pamd:
+            name: password-auth
+            type: auth 
+            control: required 
+            module_path: pam_faillock.so
+            module_arguments: 'preauth silent audit deny=5 unlock_time=900'
+            state: updated
+          when: 
+            - '{{ ansible_distribution_file_variety }} == "RedHat"'
+            - '{{ ansible_distribution_major_version }} == "8"'
+
+        - name: Inser a new rule after and existing rule
+          pamd:
+            name: password-auth
+            type: account 
+            control: required 
+            module_path: pam_unix.so
+            new_type: account
+            new_control: required
+            new_module_path: pam_faillock.so
+            state: before
+          when: 
+            - '{{ ansible_distribution_file_variety }} == "RedHat"'
+            - '{{ ansible_distribution_major_version }} == "8"'
