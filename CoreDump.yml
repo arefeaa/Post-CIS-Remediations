@@ -1,0 +1,79 @@
+---
+##############################################################################################################################################
+##  Date Created: June 8th, 2022
+##  By: Aaron Arefe
+##  This playbook was taken from the automatically generated playbook after an openscap scan created the '-arf.xml' file
+##
+##  The playbook below will modify the /etc/systemd/coredump.conf file according to CIS lvl 1 SRV standards.
+##
+##  cli equivalents:
+##  echo `Storage=none` >> /etc/systemd/coredump.conf
+##  echo `ProcessSizeMax=0` >> /etc/systemd/coredump.conf
+##  echo `systemctl daemon-reload` >> /etc/systemd/coredump.conf
+##############################################################################################################################################
+
+  tasks:
+    - name: Disable core dump backtraces
+      block:
+
+        - name: Check for duplicate values
+          lineinfile:
+            path: /etc/systemd/coredump.conf
+            create: false
+            regexp: ^\s*ProcessSizeMax\s*=\s*
+            state: absent
+          check_mode: true
+          changed_when: false
+          register: dupes
+
+        - name: Deduplicate values from /etc/systemd/coredump.conf
+          lineinfile:
+            path: /etc/systemd/coredump.conf
+            create: false
+            regexp: ^\s*ProcessSizeMax\s*=\s*
+            state: absent
+          when: dupes.found is defined and dupes.found > 1
+
+        - name: Insert correct line to /etc/systemd/coredump.conf
+          lineinfile:
+            path: /etc/systemd/coredump.conf
+            create: false
+            regexp: ^\s*ProcessSizeMax\s*=\s*
+            line: ProcessSizeMax=0
+            state: present
+
+
+    - name: Disable storing core dump
+      block:
+
+        - name: Check for duplicate values
+          lineinfile:
+            path: /etc/systemd/coredump.conf
+            create: false
+            regexp: ^\s*Storage\s*=\s*
+            state: absent
+          check_mode: true
+          changed_when: false
+          register: dupes
+
+        - name: Deduplicate values from /etc/systemd/coredump.conf
+          lineinfile:
+            path: /etc/systemd/coredump.conf
+            create: false
+            regexp: ^\s*Storage\s*=\s*
+            state: absent
+          when: dupes.found is defined and dupes.found > 1
+
+        - name: Insert correct line to /etc/systemd/coredump.conf
+          lineinfile:
+            path: /etc/systemd/coredump.conf
+            create: false
+            regexp: ^\s*Storage\s*=\s*
+            line: Storage=none
+            state: present
+
+    - name: Reload the systemd daemon for changes to go into effect
+      ansible.builtin.systemd:
+        daemon_reload: yes
+
+

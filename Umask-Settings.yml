@@ -1,0 +1,66 @@
+---
+##############################################################################################################################################
+##  Date Created: June 8th, 2022
+##  By: Aaron Arefe
+##  This playbook was taken from the automatically generated playbook after an openscap scan created the '-arf.xml' file
+##
+##  The playbook below will modify the umask settings in for /etc/bashrc, /etc/login.defs & /etc/profile file according to CIS lvl 1 SRV standards.
+##
+##############################################################################################################################################
+
+##############################################################################################################################################
+## 
+## Section is for modifying the settings in /etc/bashrc
+##
+##############################################################################################################################################
+
+vars:
+  var_accounts_user_umask: !!str 027
+
+tasks:
+
+  - name: Set user umask in /etc/bashrc
+    replace:
+      path: /etc/bashrc
+      regexp: umask.*
+      replace: umask {{ var_accounts_user_umask }}
+
+##############################################################################################################################################
+## 
+## Section is for modifying the settings in /etc/login.defs
+##
+##############################################################################################################################################
+  
+  - name: Gather the package facts
+    package_facts:
+
+  - name: Ensure the Default UMASK is Set Correctly
+    lineinfile:
+      create: true
+      dest: /etc/login.defs
+      regexp: ^UMASK
+      line: UMASK {{ var_accounts_user_umask }}
+    when: '"shadow-utils" in ansible_facts.packages'
+
+##############################################################################################################################################
+## 
+## Section is for modifying the settings in /etc/profile
+##
+##############################################################################################################################################
+
+  - name: Set user umask in /etc/profile
+    replace:
+      path: /etc/profile
+      regexp: umask.*
+      replace: umask {{ var_accounts_user_umask }}
+    tags:
+      - CCE-81035-8
+      - NIST-800-53-AC-6(1)
+      - NIST-800-53-CM-6(a)
+      - accounts_umask_etc_profile
+      - low_complexity
+      - low_disruption
+      - no_reboot_needed
+      - restrict_strategy
+      - unknown_severity
+
