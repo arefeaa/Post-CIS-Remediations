@@ -232,12 +232,11 @@
 ##   cp /etc/pam.d/system-auth /etc/pam.d/system-auth-ac.ORIG && cp /etc/pam.d/password-auth /etc/pam.d/password-auth-ac.ORIG
 ##############################################################################################################################################
 
-- import_playbook: 
-    - Mount-Modifiers.yml
-    - CoreDump.yml
-    - password-auth.yml
-    - system-auth.yml
-    - Umask-Settings.yml
+- import_playbook: Mount-Modifiers.yml
+- import_playbook: CoreDump.yml
+- import_playbook: password-auth.yml
+- import_playbook: system-auth.yml
+- import_playbook: Umask-Settings.yml
 - import_playbook: faillock.yml
   when: 
     - '{{ ansible_distribution_file_variety }} == "RedHat"'
