@@ -11,7 +11,7 @@
 ##  echo `ProcessSizeMax=0` >> /etc/systemd/coredump.conf
 ##  echo `systemctl daemon-reload` >> /etc/systemd/coredump.conf
 ##############################################################################################################################################
-
+-
   tasks:
     - name: Disable core dump backtraces
       block:
