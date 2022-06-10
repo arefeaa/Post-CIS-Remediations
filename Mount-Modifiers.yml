@@ -28,6 +28,7 @@
     var_password_pam_retry: !!str 3
     var_accounts_user_umask: !!str 027
 
+  hosts: all
   tasks:
 
     - name: Check information associated to mountpoint
