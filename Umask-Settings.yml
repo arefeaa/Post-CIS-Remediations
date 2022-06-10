@@ -17,6 +17,7 @@
   vars:
     var_accounts_user_umask: !!str 027
 
+  hosts: all
   tasks:
 
     - name: Set user umask in /etc/bashrc
