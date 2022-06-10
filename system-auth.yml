@@ -19,6 +19,7 @@
     var_password_pam_remember_control_flag: !!str required
     var_password_pam_retry: !!str 3
 
+  hosts: all
   tasks:
 
   ##############################################################################################################################################
