@@ -239,8 +239,8 @@
 - import_playbook: Umask-Settings.yml
 - import_playbook: faillock.yml
   when: 
-    - '{{ ansible_distribution_file_variety }} == "RedHat"'
-    - '{{ ansible_distribution_major_version }} == "8"'
+    - ansible_os_family == "RedHat"
+    - ansible_distribution_major_version == "8"
 - import_playbook: pam_tally2.yml
   when: 
     - ansible_os_family == "RedHat"
