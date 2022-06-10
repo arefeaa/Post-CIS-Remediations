@@ -28,9 +28,6 @@
             new_control: required
             new_module_path: pam_faillock.so
             state: after
-#          when: 
-#            - '{{ ansible_distribution_file_variety }} == "RedHat"'
-#            - '{{ ansible_distribution_major_version }} == "8"'
 
         - name: Update pamd faillock rule arguments
           pamd:
@@ -40,9 +37,6 @@
             module_path: pam_faillock.so
             module_arguments: 'preauth silent audit deny=5 unlock_time=900'
             state: updated
- #         when: 
- #           - '{{ ansible_distribution_file_variety }} == "RedHat"'
- #           - '{{ ansible_distribution_major_version }} == "8"'
 
         - name: Inser a new rule after and existing rule
           pamd:
@@ -54,11 +48,6 @@
             new_control: required
             new_module_path: pam_faillock.so
             state: before
-   #       when: 
-   #         - '{{ ansible_distribution_file_variety }} == "RedHat"'
-   #         - '{{ ansible_distribution_major_version }} == "8"'
-
-
 
     ##############################################################################################################################################
     ## 
@@ -76,9 +65,6 @@
             new_control: required
             new_module_path: pam_faillock.so
             state: after
-          when: 
-            - '{{ ansible_distribution_file_variety }} == "RedHat"'
-            - '{{ ansible_distribution_major_version }} == "8"'
 
         - name: Update pamd faillock rule arguments
           pamd:
@@ -88,9 +74,6 @@
             module_path: pam_faillock.so
             module_arguments: 'preauth silent audit deny=5 unlock_time=900'
             state: updated
-    #      when: 
-    #        - '{{ ansible_distribution_file_variety }} == "RedHat"'
-    #        - '{{ ansible_distribution_major_version }} == "8"'
 
         - name: Inser a new rule after and existing rule
           pamd:
@@ -102,6 +85,3 @@
             new_control: required
             new_module_path: pam_faillock.so
             state: before
-    #      when: 
-    #        - '{{ ansible_distribution_file_variety }} == "RedHat"'
-    #        - '{{ ansible_distribution_major_version }} == "8"'
