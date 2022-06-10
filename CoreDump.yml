@@ -12,6 +12,7 @@
 ##  echo `systemctl daemon-reload` >> /etc/systemd/coredump.conf
 ##############################################################################################################################################
 -
+  hosts: all
   tasks:
     - name: Disable core dump backtraces
       block:
